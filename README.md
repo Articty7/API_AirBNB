@@ -6,5 +6,4 @@
 
 [db-schema]: ./images/Database-Schema.png
 
-## API Documentation# API_AirBNB
-# API_AirBNB
+## API Documentation
