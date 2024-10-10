@@ -38,10 +38,10 @@ module.exports = {
         allowNull: false,
       },
       lat: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL (10, 8), // adjust precision and scale if needed
       },
       lng: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL (11, 8), // adjust precision and scale if needed
       },
       name: {
         type: Sequelize.STRING(50),
@@ -51,7 +51,7 @@ module.exports = {
         allowNull: false,
       },
       price: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL (10, 2), // adjust precision and scale if needed
       },
       createdAt: {
         allowNull: false,
@@ -66,7 +66,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Spots";
-    return await queryInterface.dropTable('Spots');
+    return await queryInterface.dropTable('Spots', options); // pass options if needed
   }
 };

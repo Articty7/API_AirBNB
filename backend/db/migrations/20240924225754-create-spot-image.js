@@ -22,10 +22,11 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING (2048) // adjust length if needed
       },
       preview: {
         type: Sequelize.BOOLEAN
+
       },
       createdAt: {
         allowNull: false,
@@ -40,7 +41,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "SpotImages";
-    return await queryInterface.dropTable('SpotImages');
+  return await queryInterface.dropTable('SpotImages', options); // pass options if needed
   }
 };

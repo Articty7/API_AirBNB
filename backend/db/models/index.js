@@ -11,10 +11,22 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
+  if (!process.env[config.use_env_variable]) {
+    console.warn (`Warning: Environment variable ${config.use_env_variable} is not set.`);
+  }
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+//test connection
+try{
+  await sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+
 
 fs
   .readdirSync(__dirname)
@@ -29,6 +41,7 @@ fs
   .forEach(file => {
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
+    console.log(`Loaded model: ${model.name}`); // Log each loaded model
   });
 
 Object.keys(db).forEach(modelName => {

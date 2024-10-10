@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Review.belongsTo(models.User, {
-        foriegnKey: 'userId',
+        foreignKey: 'userId', //typo in the original code
       });
       Review.belongsTo(models.Spot, {
-        foriegnKey: 'spotId',
+        foreignKey: 'spotId', //typo in the original code
       });
       Review.hasMany(models.ReviewImage, {
-        foriegnKey: 'reviewId',
+        foreignKey: 'reviewId', //typo in the original code
         hooks: true,
         onDelete: 'CASCADE',
-      });      
+      });
     }
   }
   Review.init({
@@ -33,19 +33,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     review: {
-      type: DataTypes.STRING, 
+      type: DataTypes.STRING,
       allowNull: false
     },
     stars: {
-      type: DataTypes.INTEGER, 
-      validate: { min: 1, max: 5 }
+      type: DataTypes.INTEGER,
+      validate: {
+        min: 1,
+        max: 5
+      }
     }
   }, {
     sequelize,
     modelName: 'Review',
-    attributes: {
-      exclude: ['UserId', 'SpotId']
-    }
-  });
+    });
   return Review;
 };

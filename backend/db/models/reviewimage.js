@@ -20,10 +20,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    url: DataTypes.STRING
-  }, {
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        isUrl: true, //Basic URL validation
+      },
+    },
+    }, {
     sequelize,
     modelName: 'ReviewImage',
+    timestamps: true, // Automatically manage createdAt and updatedAt columns
   });
   return ReviewImage;
 };

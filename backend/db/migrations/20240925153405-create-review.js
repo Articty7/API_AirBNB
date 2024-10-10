@@ -32,7 +32,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       stars: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0 // set a deafult value
       },
       createdAt: {
         allowNull: false,
@@ -47,7 +48,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Reviews";
-    return await queryInterface.dropTable('Reviews');
+    return await queryInterface.dropTable('Reviews', options);
   }
 };

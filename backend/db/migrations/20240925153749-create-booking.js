@@ -24,14 +24,16 @@ module.exports = {
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "Users"},
+        references: { model: "Users", key: "id" }, // Specify the model and key
         onDelete: 'CASCADE'
       },
       startDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false, // Add allowNull constraint
       },
       endDate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false, // Add allowNull constraint
       },
       createdAt: {
         allowNull: false,
@@ -46,7 +48,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Bookings";
-    return await queryInterface.dropTable('Bookings');
+   return await queryInterface.dropTable('Bookings', options); //pass options if needed
   }
 };

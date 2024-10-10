@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    city: { 
+    city: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    country: { 
+    country: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 49],
       }
     },
-    description: { 
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -84,11 +84,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
-    // defaultScope: {
-    //   attributes: {
-    //     exclude: ['createdAt', 'updatedAt'],
-    //   }
-    // }
+    timestamps: true,
+    defaultScope: {
+       attributes: {
+         exclude: ['createdAt', 'updatedAt'],
+       }
+     }
   });
   return Spot;
 };

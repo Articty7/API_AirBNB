@@ -25,13 +25,36 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false 
+      allowNull: false,
     },
-    startDate: DataTypes.DATE,
-    endDate: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Booking',
-  });
-  return Booking;
+    startDate: {
+      type: DataTypes.DATE,
+    allowNull: false,
+    validate: {
+      isDate: true,
+      isBefore(value){
+        if (this.endDate && value >= this.endDate) {
+          throw new Error('Start date must be before end date');
+      }
+    }
+  }
+},
+endDate: {
+  type: DataTypes.DATE,
+  allowNull: false,
+  validate: {
+    isDate: true,
+    isAfter(value){
+      if (this.startDate && value <= this.startDate) {
+        throw new Error('End date must be after start date');
+      }
+    }
+  }
+}
+}, {
+  sequelize,
+  modelName: 'Booking',
+  timestamps: true, // Automatically manage createdAt and updatedAt columns
+});
+return Booking;
 };

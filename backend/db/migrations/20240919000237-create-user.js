@@ -48,7 +48,6 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Users";
-    return await queryInterface.dropTable('Users');
+    return await queryInterface.dropTable('Users', options); // pass options if needed
   }
 };
